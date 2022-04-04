@@ -1,9 +1,15 @@
-from socket import *
-s = socket.socket() 
-serverName = '192.168.100.4'
-serverPort = 12000
-clientSocket = socket(AF_INET, SOCK_STREAM)
-clientSocket.connect((serverName, serverPort))
+import socket		 	 # Import socket module
+import sys
+import ipaddress
+
+s = socket.socket() 	  		 # Create a socket object
+
+try:
+    host = str(ipaddress.ip_address(sys.argv[1]))     # Reading IP Address
+    port = int(sys.argv[2])                           # Reading port number
+    s.connect((host, port))                           # Connecting to server
+    print("The IP address of the server is:", host)
+    print("The port number of the server is:", port)
 
     while(True):
         equ=input("Please give me your equation (Ex: 2+2) or Q to quit: ")
